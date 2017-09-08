@@ -16,3 +16,11 @@ console.log(messsage.toString());
 client.on('connect',function(){
     client.write('Mensagem do cliente');
 })
+
+process.stdin.on('readable',function(){
+    var menssagem = process.stdin.read();
+    if(!menssagem) return;
+    // a msgm vem com o caracter de quebra de linha, vc deve retirar
+    menssagem = menssagem.toString().replace(/\n/,'');
+    client.write(menssagem);
+})
